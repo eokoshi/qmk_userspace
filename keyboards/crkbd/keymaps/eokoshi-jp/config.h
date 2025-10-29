@@ -39,7 +39,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_WHEEL_DELAY 0
 
 #define RGB_MATRIX_SLEEP
-#define RGB_MATRIX_TIMEOUT 300000
 #define RGB_MATRIX_DEFAULT_SPD 50
 #define RGB_MATRIX_DEFAULT_HUE 150
 #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_REACTIVE
