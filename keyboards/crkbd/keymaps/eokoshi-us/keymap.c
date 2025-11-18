@@ -53,6 +53,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 
     return true;
+}
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(5, KC_H):
+            return true;
+        case LT(5, KC_J):
+            return true;
+        case LT(5, KC_K):
+            return true;
+        case LT(5, KC_L):
+            return true;
+        case LT(2, KC_H):
+            return true;
+        default:
+            return false;
+    }
 };
 
 const key_override_t sft_scln_override = ko_make_basic(MOD_MASK_SHIFT, KC_SCLN, KC_PLUS);
@@ -147,6 +164,7 @@ const uint16_t PROGMEM l3[] = {KC_J, JP_SCLN, COMBO_END};
 const uint16_t PROGMEM l4[] = {KC_H, JP_SCLN, COMBO_END};
 const uint16_t PROGMEM l5[] = {KC_K, KC_L, COMBO_END};
 const uint16_t PROGMEM l6[] = {KC_L, JP_SCLN, COMBO_END};
+const uint16_t PROGMEM l7[] = {KC_H, KC_J, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(r1, KC_LCBR),
@@ -161,6 +179,7 @@ combo_t key_combos[] = {
     COMBO(l4, KC_RABK),
     COMBO(l5, KC_RBRC),
     COMBO(l6, KC_RCBR),
+    COMBO(l7, JP_MINS),
 };
 
 #ifdef OTHER_KEYMAP_C
