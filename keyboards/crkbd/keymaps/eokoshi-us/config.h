@@ -23,7 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define USE_MATRIX_I2C
 
 #define TAPPING_TERM 150
-#define FLOW_TAP_TERM 75
 #define RETRO_TAPPING
 #define PERMISSIVE_HOLD
 #define HOLD_ON_OTHER_KEY_PRESS
@@ -39,9 +38,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_WHEEL_DELAY 0
 
 #define RGB_MATRIX_SLEEP
-#define RGB_MATRIX_TIMEOUT 3000000
 #define RGB_MATRIX_DEFAULT_SPD 50
-#define RGB_MATRIX_DEFAULT_HUE 1
+#define RGB_MATRIX_DEFAULT_HUE 255
 #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_REACTIVE
 
 
