@@ -20,26 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-//#define USE_MATRIX_I2C
+#include "../config.h"
 
-#define TAPPING_TERM 150
-#define RETRO_TAPPING
-#define PERMISSIVE_HOLD
-#define HOLD_ON_OTHER_KEY_PRESS
-#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
-
-#define COMBO_TERM 30
-
-#define MOUSEKEY_OVERLAP_RESET
-#define MOUSEKEY_DELAY 0
-#define MOUSEKEY_INTERVAL 16
-#define MOUSEKEY_MOVE_DELTA 1
-#define MOUSEKEY_MAX_SPEED 32
-#define MOUSEKEY_WHEEL_DELAY 0
-
-#define RGB_MATRIX_SLEEP
-#define RGB_MATRIX_DEFAULT_SPD 50
+#undef RGB_MATRIX_DEFAULT_HUE
 #define RGB_MATRIX_DEFAULT_HUE 255
-#define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_REACTIVE
-
-
