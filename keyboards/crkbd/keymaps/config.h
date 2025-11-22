@@ -1,8 +1,7 @@
 /*
 This is the c configuration file for the keymap
 
-Copyright 2012 Jun Wako <wakojun@gmail.com>
-Copyright 2015 Jack Humbert
+Copyright 2025 Ethan N. Okoshi
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,8 +24,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 150
 #define RETRO_TAPPING
 #define PERMISSIVE_HOLD
-#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
-#define FLOW_TAP_TERM 125
 
 #define COMBO_TERM 30
 
@@ -38,15 +35,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_WHEEL_DELAY 0
 
 #ifdef RGB_MATRIX_ENABLE
+    #undef RGB_MATRIX_MAXIMUM_BRIGHTNESS
+    #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 255
     #define RGB_MATRIX_DEFAULT_SPD 80
-    #define RGB_MATRIX_DEFAULT_HUE 150
-    #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_REACTIVE
-    #define RGB_MATRIX_KEYPRESSES
+    #define RGB_MATRIX_DEFAULT_HUE 200
+    #define RGB_MATRIX_DEFAULT_VAL 120
     #define RGB_MATRIX_SLEEP
+    #define RGB_MATRIX_HUE_STEP 4
+    #define RGB_MATRIX_SAT_STEP 8
+    #define RGB_MATRIX_VAL_STEP 8
+    #define RGB_MATRIX_SPD_STEP 8
+    #define RGB_MATRIX_LED_PROCESS_LIMIT 2
     #define RGB_MATRIX_LED_FLUSH_LIMIT 8
-    #define RGB_MATRIX_HUE_STEP 1
-    #define RGB_MATRIX_SAT_STEP 1
-    #define RGB_MATRIX_VAL_STEP 1
-    #define RGB_MATRIX_SPD_STEP 10
+    #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_REACTIVE
     #define ENABLE_RGB_MATRIX_RIVERFLOW
 #endif

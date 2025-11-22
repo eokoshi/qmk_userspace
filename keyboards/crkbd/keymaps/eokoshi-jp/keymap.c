@@ -55,40 +55,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 };
 
-bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case LT(5, KC_H):
-            return true;
-        case LT(5, KC_J):
-            return true;
-        case LT(5, KC_K):
-            return true;
-        case LT(5, KC_L):
-            return true;
-        case LT(2, KC_H):
-            return true;
-        default:
-            return false;
-    }
-}
-
-bool is_flow_tap_key(uint16_t keycode) {
-    if ((get_mods() & (MOD_MASK_CG | MOD_BIT_LALT)) != 0) {
-        return false; // Disable Flow Tap on hotkeys.
-    }
-    switch (get_tap_keycode(keycode)) {
-        case KC_SPC:
-        case KC_A ... KC_G:
-        case KC_I:
-        case KC_M ... KC_Z:
-        case KC_DOT:
-        case KC_COMM:
-        case KC_SCLN:
-        case KC_SLSH:
-            return true;
-    }
-    return false;
-}
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_split_3x6_3_ex2(
@@ -130,7 +96,7 @@ GUI_T(KC_TAB),    KC_Q,    KC_W,    KC_E,    KC_R,      KC_T,LT(4,KC_MUTE),     
 //|--------+--------+--------+--------+--------+--------+--------,    ,--------+--------+--------+--------+--------+--------+--------|
     QK_BOOT,   KC_F5,   KC_F6,   KC_F7,   KC_F8, KC_TRNS, KC_TRNS,      KC_TRNS, JP_MINS,    JP_4,    JP_5,    JP_6, JP_PLUS, KC_TRNS,
 //|--------+--------+--------+--------+--------+--------+--------'    '--------+--------+--------+--------+--------+--------+--------|
-    KC_TRNS,   KC_F1,   KC_F2,   KC_F3,   KC_F4, KC_TRNS,                           JP_0,    JP_1,    JP_2,    JP_3,  JP_DOT, JP_COMM,
+QK_CLEAR_EEPROM, KC_F1, KC_F2,   KC_F3,   KC_F4, KC_TRNS,                           JP_0,    JP_1,    JP_2,    JP_3,  JP_DOT, JP_COMM,
 //|--------+--------+--------+--------+--------+--------+--------,    ,--------+--------+--------+--------+--------+--------+--------|
                                         KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS
                                     //`--------------------------'    `--------------------------'
@@ -174,6 +140,13 @@ const uint16_t PROGMEM l5[] = {KC_K, KC_L, COMBO_END};
 const uint16_t PROGMEM l6[] = {KC_L, JP_SCLN, COMBO_END};
 const uint16_t PROGMEM l7[] = {KC_H, KC_J, COMBO_END};
 
+const uint16_t PROGMEM left[] = {LT(5, KC_SPC), KC_H, COMBO_END};
+const uint16_t PROGMEM down[] = {LT(5, KC_SPC), KC_J, COMBO_END};
+const uint16_t PROGMEM up[] = {LT(5, KC_SPC), KC_K, COMBO_END};
+const uint16_t PROGMEM right[] = {LT(5, KC_SPC), KC_L, COMBO_END};
+const uint16_t PROGMEM home[] = {LT(5, KC_SPC), KC_Y, COMBO_END};
+const uint16_t PROGMEM end[] = {LT(5, KC_SPC), KC_O, COMBO_END};
+
 combo_t key_combos[] = {
     COMBO(r1, JP_LCBR),
     COMBO(r2, JP_LBRC),
@@ -188,6 +161,12 @@ combo_t key_combos[] = {
     COMBO(l5, JP_RBRC),
     COMBO(l6, JP_RCBR),
     COMBO(l7, JP_MINS),
+    COMBO(left, KC_LEFT),
+    COMBO(down, KC_DOWN),
+    COMBO(up, KC_UP),
+    COMBO(right, KC_RIGHT),
+    COMBO(home, KC_HOME),
+    COMBO(end, KC_END),
 };
 
 #ifdef OTHER_KEYMAP_C
