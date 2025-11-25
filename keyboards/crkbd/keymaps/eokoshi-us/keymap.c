@@ -17,7 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
-#include "keymap_japanese.h"
 
 #if __has_include("keymap.h")
 #    include "keymap.h"
@@ -65,21 +64,44 @@ const key_override_t *key_overrides[] = {
     &sft_bsls_override
 };
 
+// Define a type for as many tap dance states as you need
+typedef enum {
+    TD_NONE,
+    TD_UNKNOWN,
+    TD_SINGLE_TAP,
+    TD_SINGLE_HOLD,
+    TD_DOUBLE_HOLD
+} td_state_t;
+
+typedef struct {
+    bool is_press_action;
+    td_state_t state;
+} td_tap_t;
+
+enum {
+    ENT_53, // Our custom tap dance key; add any other tap dance keys to this enum
+};
+
+td_state_t cur_dance(tap_dance_state_t *state);
+void ql_finished(tap_dance_state_t *state, void *user_data);
+void ql_reset(tap_dance_state_t *state, void *user_data);
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [0] = LAYOUT_split_3x6_3_ex2(
-//, ----------------------------------------------------------------------.    ,-------------------------------------------------------------------------------.
-GUI_T(KC_TAB),    KC_Q,    KC_W,    KC_E,    KC_R,      KC_T,LT(4,KC_MUTE),           KC_VOLU,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,        KC_BSPC,
-//|----------+--------+--------+--------+--------+----------+-------------|    |-------------+-------------+--------+--------+--------+--------+---------------|
-      KC_LSFT,    KC_A,    KC_S,    KC_D,    KC_F,      KC_G,        QK_M1,           KC_VOLD,         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,        KC_COLN,
-//|----------+--------+--------+--------+--------+----------+-------------|    |-------------+-------------+--------+--------+--------+--------+---------------|
-      KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,      KC_B,                                          KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, CTL_T(KC_BSLS),
-//|----------+--------+--------+--------+--------+----------+-------------|    |-------------+-------------+--------+--------+--------+--------+---------------|
-                                       KC_LALT, LT(1,KC_ESC), LT(2,KC_TAB),      LT(3,KC_ENT), LT(5,KC_SPC), KC_DEL
+//, ----------------------------------------------------------------------.    ,---------------------------------------------------------------------.
+GUI_T(KC_TAB),    KC_Q,    KC_W,    KC_E,    KC_R,      KC_T,LT(4,KC_MUTE),      KC_VOLU,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,        KC_BSPC,
+//|----------+--------+--------+--------+--------+----------+-------------|    |--------+--------+--------+--------+--------+--------+---------------|
+      KC_LSFT,    KC_A,    KC_S,    KC_D,    KC_F,      KC_G,        QK_M1,      KC_VOLD,    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,        KC_COLN,
+//|----------+--------+--------+--------+--------+----------+-------------|    |--------+--------+--------+--------+--------+--------+---------------|
+      KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,      KC_B,                                KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, CTL_T(KC_BSLS),
+//|----------+--------+--------+--------+--------+----------+-------------|    |--------+--------+--------+--------+--------+--------+---------------|
+                                       KC_LALT, LT(1,KC_ESC), LT(2,KC_TAB),     TD(ENT_53), KC_SPC,  KC_DEL
                                    //`------------------------------------'    `------------------------------------'
 ),
 [1] = LAYOUT_split_3x6_3_ex2(
 //,--------------------------------------------------------------.    ,--------------------------------------------------------------.
-    KC_TRNS, KC_TRNS, JP_MHEN, KC_CAPS,   QK_M0, KC_TRNS, KC_TRNS,      KC_TRNS,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN, KC_TILD, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_CAPS,   QK_M0, KC_TRNS, KC_TRNS,      KC_TRNS,  KC_GRV, KC_QUOT, KC_LPRN, KC_RPRN, KC_TILD, KC_TRNS,
 //|--------+--------+--------+--------+--------+--------+--------,    ,--------+--------+--------+--------+--------+--------+--------|
     KC_TRNS,   QK_M3,  KC_SPC,  KC_ENT, KC_BSPC,  KC_DEL, KC_TRNS,      KC_TRNS,  KC_EQL,  KC_DLR, KC_PERC, KC_AMPR, KC_PIPE, KC_TRNS,
 //|--------+--------+--------+--------+--------+--------+--------'    '--------+--------+--------+--------+--------+--------+--------|
@@ -143,18 +165,18 @@ const uint16_t PROGMEM r6[] = {KC_S, KC_F, COMBO_END};
 
 const uint16_t PROGMEM l1[] = {KC_J, KC_K, COMBO_END};
 const uint16_t PROGMEM l2[] = {KC_J, KC_L, COMBO_END};
-const uint16_t PROGMEM l3[] = {KC_J, JP_SCLN, COMBO_END};
-const uint16_t PROGMEM l4[] = {KC_H, JP_SCLN, COMBO_END};
+const uint16_t PROGMEM l3[] = {KC_J, KC_SCLN, COMBO_END};
+const uint16_t PROGMEM l4[] = {KC_H, KC_SCLN, COMBO_END};
 const uint16_t PROGMEM l5[] = {KC_K, KC_L, COMBO_END};
-const uint16_t PROGMEM l6[] = {KC_L, JP_SCLN, COMBO_END};
+const uint16_t PROGMEM l6[] = {KC_L, KC_SCLN, COMBO_END};
 const uint16_t PROGMEM l7[] = {KC_H, KC_J, COMBO_END};
 
-const uint16_t PROGMEM left[] = {LT(5, KC_SPC), KC_H, COMBO_END};
-const uint16_t PROGMEM down[] = {LT(5, KC_SPC), KC_J, COMBO_END};
-const uint16_t PROGMEM up[] = {LT(5, KC_SPC), KC_K, COMBO_END};
-const uint16_t PROGMEM right[] = {LT(5, KC_SPC), KC_L, COMBO_END};
-const uint16_t PROGMEM home[] = {LT(5, KC_SPC), KC_Y, COMBO_END};
-const uint16_t PROGMEM end[] = {LT(5, KC_SPC), KC_O, COMBO_END};
+const uint16_t PROGMEM left[] = {KC_SPC, KC_H, COMBO_END};
+const uint16_t PROGMEM down[] = {KC_SPC, KC_J, COMBO_END};
+const uint16_t PROGMEM up[] = {KC_SPC, KC_K, COMBO_END};
+const uint16_t PROGMEM right[] = {KC_SPC, KC_L, COMBO_END};
+const uint16_t PROGMEM home[] = {KC_SPC, KC_Y, COMBO_END};
+const uint16_t PROGMEM end[] = {KC_SPC, KC_O, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(r1, KC_LCBR),
@@ -190,3 +212,54 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
   [3] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(RM_VALD, RM_VALU), ENCODER_CCW_CW(KC_RGHT, KC_LEFT), },
 };
 #endif
+
+
+// TAP DANCE
+// Determine the current tap dance state
+td_state_t cur_dance(tap_dance_state_t *state) {
+    if (state->count == 1) {
+        if (!state->pressed) return TD_SINGLE_TAP;
+        else return TD_SINGLE_HOLD;
+    } else if (state->count == 2 && state->pressed) return TD_DOUBLE_HOLD;
+    else return TD_UNKNOWN;
+}
+
+// Initialize tap structure associated with example tap dance key
+static td_tap_t ql_tap_state = {
+    .is_press_action = true,
+    .state = TD_NONE
+};
+
+// Functions that control what our tap dance key does
+void ql_finished(tap_dance_state_t *state, void *user_data) {
+    ql_tap_state.state = cur_dance(state);
+    switch (ql_tap_state.state) {
+        case TD_SINGLE_TAP:
+            tap_code(KC_ENT);
+            break;
+        case TD_SINGLE_HOLD:
+            layer_on(5);
+            break;
+        case TD_DOUBLE_HOLD:
+            layer_on(3);
+            break;
+        default:
+            break;
+    }
+}
+
+void ql_reset(tap_dance_state_t *state, void *user_data) {
+    // If the key was held down and now is released then switch off the layer
+    if (ql_tap_state.state == TD_SINGLE_HOLD) {
+        layer_off(5);
+    }
+    if (ql_tap_state.state == TD_DOUBLE_HOLD) {
+        layer_off(3);
+    }
+    ql_tap_state.state = TD_NONE;
+}
+
+// Associate our tap dance key with its functionality
+tap_dance_action_t tap_dance_actions[] = {
+    [ENT_53] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ql_finished, ql_reset)
+};
