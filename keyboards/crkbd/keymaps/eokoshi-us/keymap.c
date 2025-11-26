@@ -171,12 +171,12 @@ const uint16_t PROGMEM l5[] = {KC_K, KC_L, COMBO_END};
 const uint16_t PROGMEM l6[] = {KC_L, KC_SCLN, COMBO_END};
 const uint16_t PROGMEM l7[] = {KC_H, KC_J, COMBO_END};
 
-const uint16_t PROGMEM left[] = {KC_SPC, KC_H, COMBO_END};
-const uint16_t PROGMEM down[] = {KC_SPC, KC_J, COMBO_END};
-const uint16_t PROGMEM up[] = {KC_SPC, KC_K, COMBO_END};
-const uint16_t PROGMEM right[] = {KC_SPC, KC_L, COMBO_END};
-const uint16_t PROGMEM home[] = {KC_SPC, KC_Y, COMBO_END};
-const uint16_t PROGMEM end[] = {KC_SPC, KC_O, COMBO_END};
+const uint16_t PROGMEM left[] = {TD(ENT_53), KC_H, COMBO_END};
+const uint16_t PROGMEM down[] = {TD(ENT_53), KC_J, COMBO_END};
+const uint16_t PROGMEM up[] = {TD(ENT_53), KC_K, COMBO_END};
+const uint16_t PROGMEM right[] = {TD(ENT_53), KC_L, COMBO_END};
+const uint16_t PROGMEM home[] = {TD(ENT_53), KC_Y, COMBO_END};
+const uint16_t PROGMEM end[] = {TD(ENT_53), KC_O, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(r1, KC_LCBR),
