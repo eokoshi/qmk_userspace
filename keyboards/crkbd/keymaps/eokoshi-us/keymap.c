@@ -34,25 +34,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         switch (keycode) {
             // windows space (change keyboard layout)
             case QK_M0:
-                SEND_STRING(SS_LGUI(SS_DELAY(1) SS_TAP(X_SPC)));
+                SEND_STRING(SS_LGUI(" "));
                 return false;
             // alt space (command palette)
             case QK_M1:
-                SEND_STRING(SS_LALT(SS_DELAY(1) SS_TAP(X_SPC)));
+                SEND_STRING(SS_LGUI(SS_LALT(" ")));
                 return false;
             // alt f4
             case QK_M2:
-                SEND_STRING(SS_LALT(SS_DELAY(1) SS_TAP(X_F4)));
+                SEND_STRING(SS_LALT(SS_TAP(X_F4)));
                 return false;
             // alt tab
             case QK_M3:
-                SEND_STRING(SS_LALT(SS_DELAY(1) SS_TAP(X_TAB)));
+                SEND_STRING(SS_LALT(SS_TAP(X_TAB)));
                 return false;
         }
     }
 
     return true;
-}
+};
 
 const key_override_t sft_scln_override = ko_make_basic(MOD_MASK_SHIFT, KC_SCLN, KC_PLUS);
 const key_override_t sft_coln_override = ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_ASTR);
