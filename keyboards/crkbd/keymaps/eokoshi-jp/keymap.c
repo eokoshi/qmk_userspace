@@ -87,7 +87,7 @@ GUI_T(KC_TAB),    KC_Q,    KC_W,    KC_E,    KC_R,      KC_T,LT(4,KC_MUTE),     
 //|----------+--------+--------+--------+--------+----------+-------------|    |--------+--------+--------+--------+--------+--------+----------------|
       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_V,      KC_B,                                KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, CTL_T(JP_BSLS),
 //|----------+--------+--------+--------+--------+----------+-------------|    |--------+--------+--------+--------+--------+--------+----------------|
-                                       KC_LALT, LT(1,KC_ESC), LT(2,KC_TAB),    TD(ENT_53), KC_SPC,  KC_DEL
+                                       KC_LALT, LT(1,KC_ESC), LT(2,KC_TAB),     LT(5, KC_ENT), KC_SPC,  LT(3, KC_DEL)
                                    //`------------------------------------'    `------------------------------------'
 ),
 [1] = LAYOUT_split_3x6_3_ex2(
@@ -136,7 +136,7 @@ QK_CLEAR_EEPROM, KC_F1, KC_F2,   KC_F3,   KC_F4, KC_TRNS,                       
 ),
 [5] = LAYOUT_split_3x6_3_ex2(
 //,--------------------------------------------------------------.    ,---------------------------------------------------------------.
-    KC_TRNS, KC_TRNS, MS_WHLU,   MS_UP, MS_WHLD, KC_TRNS, KC_TRNS,      KC_TRNS, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, KC_TRNS,    QK_M2,
+      QK_M2, KC_TRNS, MS_WHLU,   MS_UP, MS_WHLD, KC_TRNS, KC_TRNS,      KC_TRNS, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, KC_TRNS,  KC_TRNS,
 //|--------+--------+--------+--------+--------+--------+--------,    ,--------+--------+--------+--------+--------+--------+---------|
     KC_TRNS, MS_WHLL, MS_LEFT, MS_DOWN, MS_RGHT, MS_WHLR, KC_TRNS,      KC_TRNS, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_TRNS,  KC_TRNS,
 //|--------+--------+--------+--------+--------+--------+--------'    '--------+--------+--------+--------+--------+--------+---------|
